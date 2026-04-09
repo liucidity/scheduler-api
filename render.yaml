@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: scheduler-api
+    runtime: node
+    buildCommand: npm install
+    startCommand: node src/index.js
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        fromDatabase:
+          name: scheduler-db
+          property: connectionString
+
+databases:
+  - name: scheduler-db
+    databaseName: scheduler
+    user: scheduler
+    plan: free
